@@ -8,7 +8,7 @@ public class NavAgentBall : MonoBehaviour
     /// <summary>
     /// 追尾のコンポーネント
     /// </summary>
-    NavMeshAgent agent;
+    [SerializeField]NavMeshAgent agent;
 
     /// <summary>
     /// 初期設定
@@ -26,6 +26,15 @@ public class NavAgentBall : MonoBehaviour
     void Update()
     {
 
+    }
+
+    /// <summary>
+    /// オブジェクトが廃棄された際に呼ばれるイベント
+    /// </summary>
+    private void OnDestroy()
+    {
+        // ターゲットが設定された際の通知を解除する
+        GrobalStatus.UnSubscribeTargetEvent((GrobalStatus.OnTargetEvent)OnSetTarget);
     }
 
     /// <summary>

@@ -41,8 +41,9 @@ public sealed class GrobalStatus
     /// <param name="inpTarget"></param>
     public static void SetTarget(Vector3 inpTarget)
     {
+        // ターゲットを設定
         target = inpTarget;
-        // ターゲット設定を通知
+        // ターゲットが設定されたことを通知する
         NotifyTargetEvent(inpTarget);
 
     }
