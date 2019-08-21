@@ -60,12 +60,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\SandBox\GrobalStatus.cs" />
-    <Compile Include="Assets\SandBox\IRecieveTargetMessage.cs" />
-    <Compile Include="Assets\SandBox\MouseControll.cs" />
-    <Compile Include="Assets\SandBox\NavAgentBall.cs" />
-    <Compile Include="Assets\SandBox\Spawner.cs" />
-    <Compile Include="Assets\SandBox\Timelimit.cs" />
+    <Compile Include="Assets\SandBox\Scripts\GrobalStatus.cs" />
+    <Compile Include="Assets\SandBox\Scripts\Human.cs" />
+    <Compile Include="Assets\SandBox\Scripts\MouseControll.cs" />
+    <Compile Include="Assets\SandBox\Scripts\Spawner.cs" />
+    <Compile Include="Assets\SandBox\Scripts\Timelimit.cs" />
+    <Compile Include="Assets\SandBox\Scripts\Zonbi.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Administrator/Documents/SandBox/SandBox20190820/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
