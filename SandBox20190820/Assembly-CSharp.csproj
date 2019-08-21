@@ -60,9 +60,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\SandBox\Scripts\DelayUtil.cs" />
     <Compile Include="Assets\SandBox\Scripts\GrobalStatus.cs" />
     <Compile Include="Assets\SandBox\Scripts\Human.cs" />
     <Compile Include="Assets\SandBox\Scripts\MouseControll.cs" />
+    <Compile Include="Assets\SandBox\Scripts\ObjectMaster.cs" />
+    <Compile Include="Assets\SandBox\Scripts\SafeZone.cs" />
     <Compile Include="Assets\SandBox\Scripts\Spawner.cs" />
     <Compile Include="Assets\SandBox\Scripts\Timelimit.cs" />
     <Compile Include="Assets\SandBox\Scripts\Zonbi.cs" />

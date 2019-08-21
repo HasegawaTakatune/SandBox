@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,28 +7,46 @@ public class Human : MonoBehaviour
     /// <summary>
     /// ナビメッシュエージェント
     /// </summary>
-    private NavMeshAgent agent;
+    [SerializeField] private NavMeshAgent agent;
+
+    public bool isTarget = false;
 
     /// <summary>
     /// 初期処理
     /// </summary>
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        SetDestination(GrobalStatus.evacuationPlace.position);
+        // インスタンス取得
+        agent = GetComponent<NavMeshAgent>();        
+        // 目的地取得
+        StartCoroutine("SetDestination");
     }
 
-    void Update()
+    private void Update()
     {
-        
+        // セーフゾーンにたどり着いた場合
+        if (agent.remainingDistance <= 1)
+        {
+            isTarget = false;
+        }
     }
 
     /// <summary>
     /// 目的地設定
     /// </summary>
-    void SetDestination(Vector3 inpEvacuationPlace)
+    IEnumerator SetDestination()
     {
-        agent.destination = inpEvacuationPlace;
+        // 目的地が取得できるまでループする
+        while (true)
+        {
+            yield return new WaitForSeconds(Time.deltaTime);
+            if (GrobalStatus.evacuationPlace != null)
+            {
+                agent.destination = GrobalStatus.evacuationPlace.position;
+                break;
+            }
+
+        }
     }
 
 }

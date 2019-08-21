@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class MouseControll : MonoBehaviour
 {
@@ -18,15 +19,18 @@ public class MouseControll : MonoBehaviour
     private const float dragTime = 0.08f;
 
     /// <summary>
+    /// 人間インスタンス
+    /// </summary>
+    private Human human = null;
+
+    /// <summary>
     /// 人間をターゲットにした場合の格納場所
     /// </summary>
     private Transform humanTarget = null;
 
-    void Start()
-    {
-
-    }
-
+    /// <summary>
+    /// メインループ
+    /// </summary>
     void Update()
     {
 
@@ -54,9 +58,8 @@ public class MouseControll : MonoBehaviour
             timer = 0;
         }
 
-        // 人間をターゲットした際の処理
-        if (humanTarget != null)
-            SetHumanTarget();
+        // 人間をターゲットした際の処理        
+        SetHumanTarget();
     }
 
     /// <summary>
@@ -65,14 +68,21 @@ public class MouseControll : MonoBehaviour
     void SetScreenTarget()
     {
         // クリック座標を取得して、ターゲットを設定する（NavMeshAgentの目的位置）
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);       
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
         {
             // 人をターゲット選択した場合
             if (hit.collider.gameObject.tag == "Human")
             {
                 hit.collider.GetComponent<MeshRenderer>().material.color = Color.red;
+                // ターゲットに設定
                 humanTarget = hit.collider.transform;
+                // 人間インスタンス取得、ターゲットフラグをオン
+                human = hit.collider.GetComponent<Human>();
+                human.isTarget = true;
+                // 人間の追尾を開始する
+                if (humanTarget != null && human != null)
+                    StartCoroutine("SetHumanTarget");
             }
             else
             {
@@ -81,16 +91,27 @@ public class MouseControll : MonoBehaviour
                     Instantiate(showTarget, hit.point, Quaternion.identity);
                 // ターゲット設定
                 GrobalStatus.SetTarget(hit.point);
-            }            
+
+                // 人間のターゲット設定を解除
+                humanTarget = null;
+                human = null;
+            }
         }
     }
 
     /// <summary>
     /// 人間をターゲットした際の処理
     /// </summary>
-    void SetHumanTarget()
+    IEnumerator SetHumanTarget()
     {
-        GrobalStatus.SetTarget(humanTarget.position);
+        while (true)
+        {
+            yield return new WaitForSeconds(Time.deltaTime);
+            // ターゲット判定が外れたら追尾しない
+            if (!human.isTarget) break;
+            // ターゲット座標の更新
+            GrobalStatus.SetTarget(humanTarget.position);
+        }
     }
 
     /// <summary>

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public sealed class GrobalStatus
+public sealed class GrobalStatus : MonoBehaviour
 {
     /// <summary>
     /// ターゲット座標
@@ -18,15 +18,11 @@ public sealed class GrobalStatus
     private static GrobalStatus grobalStatus;
 
     /// <summary>
-    /// コンストラクタ
-    /// </summary>
-    private GrobalStatus()
+    /// 避難場所を設定する
+    /// </summary>    
+    public static void SetEvacutionPlace(Transform safeZone)
     {
-        if (grobalStatus == null)
-            grobalStatus = new GrobalStatus();
-
-        evacuationPlace = GameObject.Find("EvacuationPlace").transform;
-
+        evacuationPlace = safeZone;
     }
 
     /// <summary>
@@ -35,6 +31,9 @@ public sealed class GrobalStatus
     /// <returns>グローバルステータスクラス</returns>
     public static GrobalStatus GetInstance()
     {
+        // インスタンス生成
+        if (grobalStatus == null)
+            grobalStatus = new GrobalStatus();
         return grobalStatus;
     }
 
@@ -48,7 +47,6 @@ public sealed class GrobalStatus
         target = inpTarget;
         // ターゲットが設定されたことを通知する
         NotifyTargetEvent(inpTarget);
-
     }
 
     /// <summary>

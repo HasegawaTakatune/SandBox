@@ -16,15 +16,7 @@ public class Zonbi : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         // ターゲットが設定された際に通知するように設定
         GrobalStatus.SubscriveTargetEvent((GrobalStatus.OnTargetEvent)OnSetTarget);
-    }
-
-    /// <summary>
-    /// メインループ
-    /// </summary>
-    void Update()
-    {
-
-    }
+    }   
 
     /// <summary>
     /// オブジェクトが廃棄された際に呼ばれるイベント
