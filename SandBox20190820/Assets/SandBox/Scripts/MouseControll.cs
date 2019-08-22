@@ -31,7 +31,7 @@ public class MouseControll : MonoBehaviour
     /// <summary>
     /// メインループ
     /// </summary>
-    void Update()
+    private void Update()
     {
 
         // マウスドラッグイベント
@@ -65,7 +65,7 @@ public class MouseControll : MonoBehaviour
     /// <summary>
     /// ターゲット設定
     /// </summary>
-    void SetScreenTarget()
+    private void SetScreenTarget()
     {
         // クリック座標を取得して、ターゲットを設定する（NavMeshAgentの目的位置）
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -74,9 +74,15 @@ public class MouseControll : MonoBehaviour
             // 人をターゲット選択した場合
             if (hit.collider.gameObject.tag == "Human")
             {
+                GameObject obj = null;
                 hit.collider.GetComponent<MeshRenderer>().material.color = Color.red;
                 // ターゲットに設定
                 humanTarget = hit.collider.transform;
+                // ターゲット位置にオブジェクトを配置する（可視化している）
+                if (showTarget != null)
+                    obj = Instantiate(showTarget, hit.point, Quaternion.identity);
+                // ターゲットマーカを人間の上に表示する
+                obj.GetComponent<TargetMarker>().target = humanTarget;
                 // 人間インスタンス取得、ターゲットフラグをオン
                 human = hit.collider.GetComponent<Human>();
                 human.isTarget = true;
@@ -102,12 +108,14 @@ public class MouseControll : MonoBehaviour
     /// <summary>
     /// 人間をターゲットした際の処理
     /// </summary>
-    IEnumerator SetHumanTarget()
+    private IEnumerator SetHumanTarget()
     {
         while (true)
         {
             yield return new WaitForSeconds(Time.deltaTime);
-            // ターゲット判定が外れたら追尾しない
+            // ターゲットがnullなら抜ける
+            if (human == null) break;
+            // ターゲット判定が外れたら抜ける
             if (!human.isTarget) break;
             // ターゲット座標の更新
             GrobalStatus.SetTarget(humanTarget.position);
@@ -117,7 +125,7 @@ public class MouseControll : MonoBehaviour
     /// <summary>
     /// カメラ移動
     /// </summary>
-    void MoveScreen()
+    private void MoveScreen()
     {
         // スクリーン座標取得
         Vector3 screenPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 25);

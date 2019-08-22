@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour
     /// <summary>
     /// 初期化処理
     /// </summary>
-    void Start()
+    private void Start()
     {
         // キャラクタ・位置が設定されていなければ終了
         if (SpawnCharacter == null || SpawnTrans == null) return;

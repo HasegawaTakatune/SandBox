@@ -53,6 +53,7 @@ public sealed class GrobalStatus : MonoBehaviour
     /// イベント宣言（デリゲート）
     /// </summary>
     public delegate void OnTargetEvent(Vector3 target);
+
     /// <summary>
     /// イベント通知用インスタンス
     /// </summary>

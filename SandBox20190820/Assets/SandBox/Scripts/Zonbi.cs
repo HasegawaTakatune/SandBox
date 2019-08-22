@@ -8,15 +8,17 @@ public class Zonbi : MonoBehaviour
     /// </summary>
     [SerializeField] private NavMeshAgent agent;
 
+    private int power = 20;
+
     /// <summary>
     /// 初期設定
     /// </summary>
-    void Start()
+    private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         // ターゲットが設定された際に通知するように設定
         GrobalStatus.SubscriveTargetEvent((GrobalStatus.OnTargetEvent)OnSetTarget);
-    }   
+    }
 
     /// <summary>
     /// オブジェクトが廃棄された際に呼ばれるイベント
@@ -34,5 +36,18 @@ public class Zonbi : MonoBehaviour
     public void OnSetTarget(Vector3 target)
     {
         agent.destination = target;
+    }
+
+    /// <summary>
+    /// 当たり判定
+    /// </summary>
+    /// <param name="collision">当たった対象の情報</param>
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject obj = collision.gameObject;        
+        if (obj.tag == "Human")
+        {
+            obj.GetComponent<Human>().AddDamage(power);
+        }
     }
 }
