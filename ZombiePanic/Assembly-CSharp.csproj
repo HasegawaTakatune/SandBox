@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\SandBox\Scripts\Citizens.cs" />
     <Compile Include="Assets\SandBox\Scripts\DelayUtil.cs" />
+    <Compile Include="Assets\SandBox\Scripts\GameManager.cs" />
     <Compile Include="Assets\SandBox\Scripts\GrobalStatus.cs" />
     <Compile Include="Assets\SandBox\Scripts\Human.cs" />
     <Compile Include="Assets\SandBox\Scripts\MouseControll.cs" />
