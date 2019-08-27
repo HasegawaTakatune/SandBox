@@ -19,9 +19,14 @@ public class Human : MonoBehaviour
     protected bool isDead = false;
 
     /// <summary>
-    /// 減速
+    /// 最低速度
     /// </summary>
     protected const float lowSpeed = 0.5f;
+
+    /// <summary>
+    /// 最高速度
+    /// </summary>
+    protected const float maxSpeed = 8.0f;
 
     /// <summary>
     /// 体力

@@ -22,7 +22,7 @@ public class Zombie : MonoBehaviour
     /// 移動速度
     /// </summary>
     [SerializeField] private float speed = 8;
-    
+
     /// <summary>
     /// 死亡判定
     /// </summary>

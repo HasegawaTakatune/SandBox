@@ -11,14 +11,14 @@ public class Citizens : Human
         // ベースクラスの初期化呼び出し
         base.Start();
         // 目的地取得
-        StartCoroutine("SetDestination");        
+        StartCoroutine("SetDestination");
     }
 
     /// <summary>
     /// メインループ
     /// </summary>
     void Update()
-    {        
+    {
         // セーフゾーンにたどり着いた場合
         if (agent.remainingDistance <= 2)
         {
@@ -53,7 +53,10 @@ public class Citizens : Human
         if (!isDead)
         {
             // 死んでいなければダメージを受ける
-            base.AddDamage(damage);           
+            base.AddDamage(damage);
+
+            // キル数カウント
+            if (isDead) GameManager.AddHumanKillCount();
         }
     }
 }

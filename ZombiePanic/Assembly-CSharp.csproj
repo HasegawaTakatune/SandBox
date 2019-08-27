@@ -63,6 +63,7 @@
     <Compile Include="Assets\SandBox\Scripts\Citizens.cs" />
     <Compile Include="Assets\SandBox\Scripts\DelayUtil.cs" />
     <Compile Include="Assets\SandBox\Scripts\GameManager.cs" />
+    <Compile Include="Assets\SandBox\Scripts\GameOverPanel.cs" />
     <Compile Include="Assets\SandBox\Scripts\GrobalStatus.cs" />
     <Compile Include="Assets\SandBox\Scripts\Human.cs" />
     <Compile Include="Assets\SandBox\Scripts\MouseControll.cs" />
@@ -72,8 +73,27 @@
     <Compile Include="Assets\SandBox\Scripts\SafeZone.cs" />
     <Compile Include="Assets\SandBox\Scripts\Soldiers.cs" />
     <Compile Include="Assets\SandBox\Scripts\Spawner.cs" />
+    <Compile Include="Assets\SandBox\Scripts\StartPanel.cs" />
     <Compile Include="Assets\SandBox\Scripts\TargetMarker.cs" />
     <Compile Include="Assets\SandBox\Scripts\Zombie.cs" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Administrator/Documents/SandBox/ZombiePanic/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

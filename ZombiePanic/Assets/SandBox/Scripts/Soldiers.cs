@@ -5,6 +5,11 @@ using UnityEngine;
 public class Soldiers : Human
 {
     /// <summary>
+    /// 最大体力
+    /// </summary>
+    const float MAX_HEALTH = 100;
+
+    /// <summary>
     /// 衝突する対象のレイヤ
     /// </summary>
     [SerializeField] private LayerMask mask;
@@ -49,12 +54,17 @@ public class Soldiers : Human
     /// <summary>
     /// モード
     /// </summary>
-    private MODE mode = MODE.PATROLL;
+    [SerializeField] private MODE mode = MODE.PATROLL;
 
     /// <summary>
     /// 敵ターゲット格納
     /// </summary>
     private Transform targetEnemy = null;
+
+    /// <summary>
+    /// 攻撃力
+    /// </summary>
+    private int power = 5;
 
     /// <summary>
     /// 初期化
@@ -74,7 +84,6 @@ public class Soldiers : Human
         // モードごとに分岐
         switch (mode)
         {
-
             case MODE.PATROLL: Patroll(); break;    // 巡回            
             case MODE.WARY: Wary(); break;          // 警戒            
             case MODE.ATTACK: Attack(); break;      // 攻撃            
@@ -104,25 +113,7 @@ public class Soldiers : Human
         {
             targetEnemy = hit.transform;
             mode = MODE.WARY;
-            Debug.Log(hit.collider.name);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        // SphereCastの半径
-        float radius = 10.0f;
-        // SphereCastの距離
-        int length = 4;
-
-        if (Physics.SphereCast(transform.position, radius, transform.forward * length, out RaycastHit hit, length, mask))
-        {
-            Gizmos.color = Color.red;
-            //Gizmos.DrawSphere(transform.position + transform.forward * length, radius);
-            Debug.Log(hit.collider.name);
-            Gizmos.DrawSphere(hit.point, 0.5f);
-        }
-        else Gizmos.DrawSphere(transform.position + transform.forward * length, radius);
     }
 
     /// <summary>
@@ -130,6 +121,20 @@ public class Soldiers : Human
     /// </summary>
     private void Wary()
     {
+        // 体力が半分以上残っていれば戦い
+        // 残っていなければ逃げる
+        if (health >= MAX_HEALTH / 2)
+        {
+            agent.destination = targetEnemy.position;
+            agent.stoppingDistance = 2;
+            agent.speed = maxSpeed;
+            mode = MODE.ATTACK;
+        }
+        else
+        {
+            agent.destination = GrobalStatus.evacuationPlace.position;
+            mode = MODE.ESCAPE;
+        }
 
     }
 
@@ -138,7 +143,20 @@ public class Soldiers : Human
     /// </summary>
     private void Attack()
     {
-
+        // 射程距離まで近づいたら攻撃開始
+        if (agent.remainingDistance <= 2)
+        {
+            // レイを飛ばして本当に攻撃が当たるのかを判定
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 10.0f))
+            {
+                // ダメージを与える
+                GameObject obj = hit.collider.gameObject;
+                if (obj.layer == mask)
+                {
+                    obj.GetComponent<Zombie>().AddDamage(power);
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -146,7 +164,6 @@ public class Soldiers : Human
     /// </summary>
     private void Escape()
     {
-
     }
 
     /// <summary>
@@ -158,6 +175,9 @@ public class Soldiers : Human
         if (!isDead)
         {
             base.AddDamage(damage);
+
+            // キル数カウント
+            if (isDead) GameManager.AddSoldierKillCount();
         }
     }
 
