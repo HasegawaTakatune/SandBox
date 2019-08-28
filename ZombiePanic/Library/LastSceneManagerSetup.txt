@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/SurvivalStylizedCharacters/Demo/Characters.unity
+- path: Assets/SandBox/Demo.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
