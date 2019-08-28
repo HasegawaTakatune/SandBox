@@ -4,6 +4,11 @@ using UnityEngine.AI;
 public class Zombie : MonoBehaviour
 {
     /// <summary>
+    /// アニメータ
+    /// </summary>
+    [SerializeField] private Animator animator;
+
+    /// <summary>
     /// 追尾のコンポーネント
     /// </summary>
     [SerializeField] private NavMeshAgent agent;
@@ -33,8 +38,11 @@ public class Zombie : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        // インスタンス取得
+        // ナビメッシュエージェント取得
         agent = GetComponent<NavMeshAgent>();
+
+        // アニメータ取得
+        animator = GetComponent<Animator>();
 
         // 速度設定
         agent.speed = speed;
@@ -58,6 +66,8 @@ public class Zombie : MonoBehaviour
     /// <param name="target">ターゲット</param>
     public void OnSetTarget(Vector3 target)
     {
+        // 歩くアニメーション再生
+        animator.SetTrigger(GrobalStatus.ANIM_WALK);
         agent.destination = target;
     }
 
@@ -70,6 +80,10 @@ public class Zombie : MonoBehaviour
         GameObject obj = collision.gameObject;
         if (obj.tag == "Human")
         {
+            // 攻撃アニメーション再生
+            animator.SetTrigger(GrobalStatus.ANIM_ATTACK);
+
+            // ダメージを与える
             obj.GetComponent<Human>().AddDamage(power);
         }
     }
@@ -83,7 +97,12 @@ public class Zombie : MonoBehaviour
         if (!isDead)
         {
             health -= damage;
-            if (health <= 0) isDead = true;
+            if (health <= 0)
+            {
+                // 死亡アニメーション再生
+                animator.SetTrigger(GrobalStatus.ANIM_DEAD);
+                isDead = true;
+            }
         }
-    }
+    }    
 }

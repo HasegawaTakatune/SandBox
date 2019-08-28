@@ -127,11 +127,13 @@ public class MouseControll : MonoBehaviour
     /// </summary>
     private void MoveScreen()
     {
+        float posY = transform.position.y;
+
         // スクリーン座標取得
-        Vector3 screenPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 25);
+        Vector3 screenPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, posY);
 
         // スクリーン座標の移動分カメラ移動させる        
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(worldPos.x, 25, worldPos.z), Time.deltaTime);
+        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(worldPos.x, posY, worldPos.z), Time.deltaTime);
     }
 }

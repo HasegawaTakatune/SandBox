@@ -2,6 +2,11 @@
 
 public sealed class GrobalStatus : MonoBehaviour
 {
+
+    public const string ANIM_WALK = "Walk";
+    public const string ANIM_ATTACK = "Attack";
+    public const string ANIM_DEAD = "Dead";
+
     /// <summary>
     /// ターゲット座標
     /// </summary>

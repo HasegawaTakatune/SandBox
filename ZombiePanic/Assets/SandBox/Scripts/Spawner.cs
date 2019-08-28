@@ -20,15 +20,17 @@ public class Spawner : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        float range = 1.0f;
+
         // キャラクタ・位置が設定されていなければ終了
         if (SpawnCharacter == null || SpawnTrans == null) return;
 
         // キャラクタ生成
         for (int i = 0; i < 10; i++)
-        {
+        {   
             for (int j = 0; j < 10; j++)
             {
-                Instantiate(SpawnCharacter, SpawnTrans.position + new Vector3(i * 0.5f, 0, j * 0.5f), Quaternion.identity);
+                Instantiate(SpawnCharacter, SpawnTrans.position + new Vector3(i * range, 0, j * range), Quaternion.identity);
             }
         }
     }
