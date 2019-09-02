@@ -38,6 +38,7 @@ public class Citizens : Human
             if (GrobalStatus.evacuationPlace != null)
             {
                 agent.destination = GrobalStatus.evacuationPlace.position;
+                GetComponent<Animation>().Play();
                 break;
             }
 
