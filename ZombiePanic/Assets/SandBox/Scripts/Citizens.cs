@@ -59,5 +59,6 @@ public class Citizens : Human
             // キル数カウント
             if (isDead) GameManager.AddHumanKillCount();
         }
+        else Destroy(gameObject);
     }
 }
